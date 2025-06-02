@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\MediartSegregation.Application\MediartSegregation.Application.csproj" />
+    <ProjectReference Include="..\..\src\MediartSegregation.Domain\MediartSegregation.Domain.csproj" />
+    <ProjectReference Include="..\..\src\MediartSegregation.Shared\MediartSegregation.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

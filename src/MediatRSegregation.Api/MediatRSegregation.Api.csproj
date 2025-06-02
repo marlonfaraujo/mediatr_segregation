@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.5.0" />
+    <ProjectReference Include="..\MediartSegregation.Application\MediartSegregation.Application.csproj" />
+    <ProjectReference Include="..\MediartSegregation.Domain\MediartSegregation.Domain.csproj" />
+    <ProjectReference Include="..\MediartSegregation.Shared\MediartSegregation.Shared.csproj" />
   </ItemGroup>
 
 </Project>

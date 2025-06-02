@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediartSegregation.Domain\MediartSegregation.Domain.csproj" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>
