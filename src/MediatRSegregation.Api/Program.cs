@@ -1,11 +1,8 @@
 using MediartSegregation.Application;
-using MediartSegregation.Application.Ping.Events;
 using MediartSegregation.Application.Ping.UseCases.CreatePing;
 using MediartSegregation.Application.UseCases.Ping.GetPing;
-using MediartSegregation.Domain.Events;
-using MediartSegregation.Domain.Shared.Abstractions;
-using MediartSegregation.Shared.MediatRExtensions.Implementation;
 using MediatR;
+using MediatRSegregation.Shared.MediatRExtensions;
 using MediatRSegregation.Shared.MediatRExtensions.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,12 +14,7 @@ builder.Services.AddMediatR(cfg =>
         typeof(Program).Assembly
     );
 });
-
-builder.Services.AddTransient<IDomainNotificationHandler<PingGetEvent>, PingGetEventHandler>();
-builder.Services.AddTransient<IDomainNotificationHandler<PingCreatedEvent>, PingCreatedEventHandler>();
-
-builder.Services.AddTransient<INotificationHandler<MediatRDomainNotification<PingGetEvent>>, MediatRNotificationHandlerAdapter<PingGetEvent>>();
-builder.Services.AddTransient<INotificationHandler<MediatRDomainNotification<PingCreatedEvent>>, MediatRNotificationHandlerAdapter<PingCreatedEvent>>();
+builder.Services.AddAdapterRegistrationExtensions(typeof(Application).Assembly);
 
 var app = builder.Build();
 
