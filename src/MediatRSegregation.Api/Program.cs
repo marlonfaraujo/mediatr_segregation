@@ -1,32 +1,39 @@
+using MediartSegregation.Application;
+using MediartSegregation.Application.Ping.Events;
+using MediartSegregation.Application.Ping.UseCases.CreatePing;
+using MediartSegregation.Application.UseCases.Ping.GetPing;
+using MediartSegregation.Domain.Events;
+using MediartSegregation.Domain.Shared.Abstractions;
+using MediartSegregation.Shared.MediatRExtensions.Implementation;
+using MediatR;
+using MediatRSegregation.Shared.MediatRExtensions.Implementation;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblies(
+        typeof(Application).Assembly,
+        typeof(Program).Assembly
+    );
+});
+
+builder.Services.AddTransient<IDomainNotificationHandler<PingGetEvent>, PingGetEventHandler>();
+builder.Services.AddTransient<IDomainNotificationHandler<PingCreatedEvent>, PingCreatedEventHandler>();
+
+builder.Services.AddTransient<INotificationHandler<MediatRDomainNotification<PingGetEvent>>, MediatRNotificationHandlerAdapter<PingGetEvent>>();
+builder.Services.AddTransient<INotificationHandler<MediatRDomainNotification<PingCreatedEvent>>, MediatRNotificationHandlerAdapter<PingCreatedEvent>>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+var serviceProvider = builder.Services.BuildServiceProvider();
+var mediator = serviceProvider.GetRequiredService<IMediator>();
 
-var summaries = new[]
+app.MapPost("/ping", async () =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    var createPingResponse = await mediator.Send(new MediatRRequestAdapter<CreatePingCommand, CreatePingResponse>(new CreatePingCommand()));
+    var getPingResponse = await mediator.Send(new MediatRRequestAdapter<GetPingQuery, GetPingResponse>(new GetPingQuery()));
+    return new { CreateMessage = createPingResponse.Message, GetMessage = getPingResponse.Message };
 });
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
