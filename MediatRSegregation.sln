@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediartSegregation.Applicat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediartSegregation.Domain", "src\MediartSegregation.Domain\MediartSegregation.Domain.csproj", "{2C2A708E-D765-4B8D-A380-D36C6C94BDC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediartSegregation.Samples", "samples\MediartSegregation.Samples\MediartSegregation.Samples.csproj", "{B903642C-D87A-4D3C-8687-1183402062E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediartSegregation.Test", "test\MediartSegregation.Test\MediartSegregation.Test.csproj", "{3598E779-D6E3-49AB-9273-567E502EE2A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2C2A708E-D765-4B8D-A380-D36C6C94BDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C2A708E-D765-4B8D-A380-D36C6C94BDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C2A708E-D765-4B8D-A380-D36C6C94BDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B903642C-D87A-4D3C-8687-1183402062E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B903642C-D87A-4D3C-8687-1183402062E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B903642C-D87A-4D3C-8687-1183402062E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B903642C-D87A-4D3C-8687-1183402062E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3598E779-D6E3-49AB-9273-567E502EE2A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3598E779-D6E3-49AB-9273-567E502EE2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3598E779-D6E3-49AB-9273-567E502EE2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3598E779-D6E3-49AB-9273-567E502EE2A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
