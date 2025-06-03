@@ -23,6 +23,7 @@ There are also many projects that ignore MediatR's INotification functionality, 
 This may be an old view on my part about the framework, but I will focus on summarizing the two implementations:
 
 - INotification
+
 Here I inverted the dependency and instead of implementing INotification directly in a domain layer class for example, I just implement the BaseDomainEvent class in the domain.
 ```csharp
 public class MediatRDomainNotification<TNotification> : INotification where TNotification : BaseDomainEvent
@@ -36,6 +37,7 @@ public class MediatRDomainNotification<TNotification> : INotification where TNot
 }
 ```
 - INotificationHandler
+
 For the handler I do the same thing, I have implemented the IDomainNotificationHandler interface in my domain layer instead of the MediatR INotificationHandler interface
 ```csharp
 public class MediatRNotificationHandlerAdapter<TNotification>
@@ -54,6 +56,7 @@ public class MediatRNotificationHandlerAdapter<TNotification>
 }
 ```
 - IRequest
+
 Same idea as the previous example, I invert the dependency and use the IRequestApplication interface in the application layer instead of the MediatR IRequest interface
 ```csharp
 public class MediatRRequestAdapter<TRequest, TResult> : IRequest<TResult> where TRequest : IRequestApplication<TResult>
@@ -67,6 +70,7 @@ public class MediatRRequestAdapter<TRequest, TResult> : IRequest<TResult> where 
 }
 ```
 - IRequestHandler
+
 For IRequestHandler I have the implementation of this other interface IRequestApplicationHandler without dependencies with MediatR
 ```csharp
 public class MediatRRequestHandlerAdapter<TRequest, TResult> 
