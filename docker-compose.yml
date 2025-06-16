@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  mediatr-segregation-webapi:
+    container_name: mediatr_segregation_webapi
+    build:
+      context: .
+      dockerfile: src/MediatRSegregation.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "8080:8080"
+    networks:
+      - mediatr-segregation-network
+
+networks:
+  mediatr-segregation-network: {}
