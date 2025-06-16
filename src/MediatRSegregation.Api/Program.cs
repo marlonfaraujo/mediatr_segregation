@@ -16,7 +16,8 @@ builder.Services.AddMediatR(cfg =>
     );
 });
 builder.Services.AddAdapterRegistrationExtensions(typeof(Application).Assembly);
-builder.Services.AddScoped<MyMediator>();
+builder.Services.AddScoped<IMyMediator, MyMediator>();
+builder.Services.AddScoped<MyMediatorNotificationAdapter>();
 
 var app = builder.Build();
 
@@ -33,8 +34,8 @@ app.MapPost("/ping", async () =>
 
 app.MapGet("/pong", async () =>
 {
-    var myMediator = serviceProvider.GetRequiredService<MyMediator>();
-    var myMediatorNotification = new MyMediatorNotificationAdapter(myMediator);
+    var myMediator = serviceProvider.GetRequiredService<IMyMediator>();
+    var myMediatorNotification = serviceProvider.GetRequiredService<MyMediatorNotificationAdapter>();
 
     var createPingResponse = await myMediator.SendAsync<CreatePingCommand,CreatePingResponse>(
         new CreatePingCommand("pong"), 

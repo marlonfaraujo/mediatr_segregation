@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MediartSegregation.Shared.MyMediator
 {
-    public class MyMediator
+    public class MyMediator : IMyMediator
     {
         private readonly IServiceProvider _provider;
 

@@ -6,9 +6,9 @@ namespace MediartSegregation.Shared.MyMediator
 {
     public class MyMediatorNotificationAdapter : IDomainNotificationAdapter 
     {
-        private readonly MyMediator _mediator;
+        private readonly IMyMediator _mediator;
 
-        public MyMediatorNotificationAdapter(MyMediator mediator)
+        public MyMediatorNotificationAdapter(IMyMediator mediator)
         {
             this._mediator = mediator;
         }
