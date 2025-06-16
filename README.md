@@ -2,10 +2,10 @@
 
 Framework MediatR and the Mediator pattern
 
-## 1. What is the motivation??
-After the news in 2025 that its new versions would be paid, and having recently worked on projects that use it, I had the idea of ​​sharing my experiences with it and how you can try to base your project more on the abstractions of these types of frameworks.
+## 1. What is the motivation?
+After the 2025 announcement that its new versions would become paid, and having recently worked on projects that use it, I decided to share my experiences with the framework and how you can structure your project to rely more on abstractions provided by this kind of tool.
 
-It is currently rare to find projects in which I have participated with the MediatR framework since 2023, in some projects I have used other competitors and in others, my own implementations.
+Since 2023, I have seen more frameworks that implement the mediator pattern. In some cases, I have adopted alternative libraries to MediatR, in others, I've implemented custom solutions tailored to the project's needs.
 
 ## 2. More about:
 In my career with several different teams and projects, I noticed that MediatR was being used in any type of project and to solve any problem. Perhaps the reason is the teams' familiarity with the framework.
