@@ -16,11 +16,20 @@ namespace MediartSegregation.Shared.MyMediator
             _provider = provider;
         }
 
-        public async Task<TResponse> SendAsync<TRequest,TResponse>(TRequest request, 
-            IRequestApplicationHandler<TRequest,TResponse> requestApplicationHandler, 
-            CancellationToken cancellationToken = default) where TRequest : IRequestApplication<TResponse>
+        public async Task<TResponse> SendAsync<TRequest,TResponse>(TRequest request, CancellationToken cancellationToken = default) where TRequest : IRequestApplication<TResponse>
         {
-            var result = await requestApplicationHandler.Handle(request, cancellationToken);
+            var handlerType = typeof(IRequestApplicationHandler<,>).MakeGenericType(request.GetType(), typeof(TResponse));
+            if (handlerType == null)
+            {
+                throw new InvalidOperationException("No handler found for type.");
+            }
+            var handler = _provider.GetService(handlerType);
+            if( handler == null)
+            {
+                throw new InvalidOperationException($"Handler for type {handlerType.Name} not found.");
+            }
+            var method = handlerType.GetMethod("Handle");
+            var result = await (Task<TResponse>)method.Invoke(handler, new object[] { request, cancellationToken });
             return result;
         }
 

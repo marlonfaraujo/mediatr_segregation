@@ -38,12 +38,10 @@ app.MapGet("/pong", async () =>
     var myMediatorNotification = serviceProvider.GetRequiredService<MyMediatorNotificationAdapter>();
 
     var createPingResponse = await myMediator.SendAsync<CreatePingCommand,CreatePingResponse>(
-        new CreatePingCommand("pong"), 
-        new CreatePingHandler(myMediatorNotification));
+        new CreatePingCommand("pong"));
 
     var getPingResponse = await myMediator.SendAsync<GetPingQuery, GetPingResponse>(
-        new GetPingQuery("pong"), 
-        new GetPingHandler(myMediatorNotification));
+        new GetPingQuery("pong"));
 
     return new { CreateMessage = createPingResponse.Message, GetMessage = getPingResponse.Message };
 });

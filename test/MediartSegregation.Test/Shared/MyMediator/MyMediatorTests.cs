@@ -18,23 +18,26 @@ namespace MediartSegregation.Test.Shared.MyMediator
         public async Task SendAsync_Should_Call_Handler_And_Return_Response()
         {
             // Arrange
-            var request = new CreatePingCommand();
+            var request = new CreatePingCommand("ping");
             var expectedResponse = new CreatePingResponse("ping");
+
             var handlerMock = new Mock<IRequestApplicationHandler<CreatePingCommand, CreatePingResponse>>();
             handlerMock
                 .Setup(h => h.Handle(request, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(expectedResponse);
 
             var serviceProviderMock = new Mock<IServiceProvider>();
+            serviceProviderMock.Setup(sp => sp.GetService(typeof(IRequestApplicationHandler<CreatePingCommand, CreatePingResponse>)))
+                .Returns(handlerMock.Object);
 
             // Fix: Ensure MyMediator is correctly referenced as a type, not a namespace.
             var mediator = new MediartSegregation.Shared.MyMediator.MyMediator(serviceProviderMock.Object);
 
             // Act
-            var response = await mediator.SendAsync(request, handlerMock.Object, CancellationToken.None);
+            var response = await mediator.SendAsync<CreatePingCommand, CreatePingResponse>(request, CancellationToken.None);
 
             // Assert
-            Assert.Equal(expectedResponse, response);
+            Assert.Equal(expectedResponse.Message, response.Message);
             handlerMock.Verify(h => h.Handle(request, It.IsAny<CancellationToken>()), Times.Once);
         }
 
