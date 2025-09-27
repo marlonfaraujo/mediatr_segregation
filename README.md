@@ -3,24 +3,24 @@
 Framework MediatR and the Mediator pattern
 
 ## 1. What is the motivation?
-After the 2025 announcement that its new versions would become paid, and having recently worked on projects that use it, I decided to share my experiences with the framework and how you can structure your project to rely more on abstractions provided by this kind of tool.
+After the 2025 announcement that its new versions would become paid, and having recently worked on projects that use it, I decided to share my experiences with the framework and how you can have alternatives.
 
 Since 2023, I have seen more frameworks that implement the mediator pattern. In some cases, I have adopted alternative libraries to MediatR, in others, I've implemented custom solutions tailored to the project's needs.
 
 ## 2. More about:
 In my career with several different teams and projects, I noticed that MediatR was being used in any type of project and to solve any problem. Perhaps the reason is the teams' familiarity with the framework.
 
-In 2023, I returned to participate in some in-person talks and events, after the hiatus we all had during the COVID pandemic. In one of these events, the topic discussed was the mediator pattern and how market frameworks work, including MediatR.
+In 2023, I returned to participate in some in-person talks and events, after the hiatus we all had during the COVID pandemic. In one of these events, the topic discussed was CQRS, mediator pattern and how market frameworks work, including MediatR.
 
 I was able to make the most of this event and, later, I realized that the framework really solved something that could be complex in our projects in a simple way. With a lot of work and many deliveries to make, I never had time to study it and delve deeper into how it works, my mistake.
 
 ## 3. Problem:
-This may be a problem for some and not for others, but I see the framework being used in various architectures without worrying about dependencies in application and domain layers. And when you have the opportunity to install just the MediatR.Contracts package in more restricted layers, I see full MediatR installations even when it is not needed.
+This may be a problem for some and not for others, but I see the framework being used in various architectures adding unnecessary complexity, extra layers of abstraction and making the learning curve and maintenance more difficult without delivering real value gains.
 
-There are also many projects that ignore MediatR's INotification functionality, installing another framework in the same project to be another form of in-memory notification. Additionally, I have seen its use in simpler projects that only perform CRUD operations.
+There are also many projects that ignore MediatR's INotification functionality, installing another framework in the same project to be another form of in-memory notification.
 
 ## 4. Digging a little deeper into the subject:
-This may be an old view on my part about the framework, but I will focus on summarizing the two implementations:
+I'll briefly show two different for CQRS implementations. Don't do this, as by inverting the dependency on the MediatR framework, I ended up overengineering. My intention here was for didatic purposes and to showcase other framework options, since MediatR has become a paid framework.
 
 - INotification
 
@@ -188,4 +188,4 @@ It maps the classes that implement IRequestHandler, INotificationHandler, etc, f
 Therefore, during startup and depending on the size of the project and the number of classes, it may take some time to go through these registrations. With this, it can resolve, for example, even handler classes that receive other dependencies in their constructor method.
 
 ## 5. Conclusion
-The main goal was to show that, with dependency inversion, it is possible to isolate MediatR from the application or domain layer. In addition to talking a little about my experience with the framework and some impressions I had in the projects I worked on. Feel free to send any issue or pull request. I'm not very active here, but as soon as I can, I'll respond.
+The main objective was to show that there are alternatives to MediatR, such as the brief implementation I made, among others such as [Wolverine](https://github.com/JasperFx/wolverine). In addition to talking a little about my experience with the framework and some impressions I had in the projects I worked on. Feel free to send any issue or pull request. I'm not very active here, but as soon as I can, I'll respond.
